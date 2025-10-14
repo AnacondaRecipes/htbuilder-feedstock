@@ -1,27 +1,27 @@
 {% set name = "htbuilder" %}
-{% set version = "0.6.2" %}
+{% set version = "0.9.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/htbuilder-{{ version }}.tar.gz
-  sha256: 9979a4fb6e50ce732bf6f6bc0441039dcaa3a3fc70689d8f38f601ed8a1aeec0
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/htbuilder-{{ version }}.tar.gz
+  sha256: 58c0bc5502c1a46b42ae9e074c43ec0f6fdc24ed334936cb17e1ed5a8938aee2
 
 build:
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
-  skip: true  # [py<35]
+  skip: true  # [py<37]
 
 requirements:
   host:
-    - python 
+    - python
     - pip
     - setuptools
     - wheel
   run:
-    - python 
+    - python
     - more-itertools
 
 test:
@@ -38,7 +38,7 @@ about:
   doc_url: https://github.com/tvst/htbuilder/blob/master/README.md
   summary: A purely-functional HTML builder for Python. Think JSX rather than templates.
   description: |
-    htbuilder lets you build HTML strings using a purely functional syntax in Python. Why use 
+    htbuilder lets you build HTML strings using a purely functional syntax in Python. Why use
     templating languages when you can just use functions?
   license: Apache-2.0
   license_file: LICENSE
