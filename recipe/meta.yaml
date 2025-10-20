@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/htbuilder-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 58c0bc5502c1a46b42ae9e074c43ec0f6fdc24ed334936cb17e1ed5a8938aee2
 
 build:
@@ -22,13 +22,17 @@ requirements:
     - wheel
   run:
     - python
-    - more-itertools
 
 test:
   imports:
     - htbuilder
+    - htbuilder.funcs
+    - htbuilder.units
+    - htbuilder.utils
   commands:
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    # Upstream tests not available on PIP, github upstream doesn't have 0.9.0 version to download
   requires:
     - pip
 
